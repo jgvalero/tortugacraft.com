@@ -1,0 +1,28 @@
+body {
+  background-color: #143d60;
+}
+
+#header {
+  background-color: #27667b;
+}
+
+h1,
+h2,
+hr {
+  color: #ddeb9d;
+  font-family: "rye";
+}
+
+p,
+ul {
+  color: #a0c878;
+  font-family: sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.short-hr {
+  width: 25%;
+}
