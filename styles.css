@@ -1,21 +1,21 @@
 body {
-  background-color: #143d60;
+  background-color: #2d4f2b;
 }
 
 #header {
-  background-color: #27667b;
+  background-color: #708a58;
 }
 
 h1,
 h2,
 hr {
-  color: #ddeb9d;
+  color: #ffb823;
   font-family: "rye";
 }
 
 p,
 ul {
-  color: #a0c878;
+  color: #fff1ca;
   font-family: sans-serif;
 }
 
