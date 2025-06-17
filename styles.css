@@ -1,9 +1,30 @@
-body {
-  background-color: #2d4f2b;
+header span {
+  color: #ffb823;
+  font-family: "rye";
 }
 
-#header {
-  background-color: #708a58;
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #fff1ca;
+  background-color: #ffb823;
+}
+
+.nav-link {
+  color: #ffb823;
+  font-family: "rye";
+}
+
+.nav-link:focus,
+.nav-link:hover {
+  color: #fff1ca;
+}
+
+.border-bottom {
+  border-bottom: var(--bs-border-width) var(--bs-border-style) #ffb823 !important;
+}
+
+body {
+  background-color: #2d4f2b;
 }
 
 h1,
