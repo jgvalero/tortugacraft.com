@@ -27,6 +27,10 @@ body {
   background-color: #2d4f2b;
 }
 
+.text-body-emphasis {
+  color: #ffb823 !important;
+}
+
 h1,
 h2,
 hr {
