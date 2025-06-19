@@ -51,3 +51,8 @@ ul {
 .short-hr {
   width: 25%;
 }
+
+#line-chart-div {
+  background-color: #ffb823;
+  border-radius: 10px;
+}
