@@ -1,10 +1,14 @@
+import argparse
 import json
 from pathlib import Path
 
 import requests
 
-url = "https://api.minecraftservices.com/minecraft/profile/lookup/"
+parser = argparse.ArgumentParser(description="Save Minecraft stats as a JSON file.")
+parser.add_argument("filename", type=str, help="The name of the output JSON file.")
+args = parser.parse_args()
 
+url = "https://api.minecraftservices.com/minecraft/profile/lookup/"
 directory = Path("utils/raw")
 uuids = [file.stem for file in directory.iterdir() if file.is_file()]
 
@@ -43,4 +47,8 @@ for uuid in uuids:
         }
     )
 
-print(stats)
+output_path = Path(args.filename)
+with open(output_path, "w") as outfile:
+    json.dump(stats, outfile, indent=4)
+
+print(f"Stats saved to {output_path}")
