@@ -96,6 +96,9 @@ function drawLineChart(stat) {
       });
 
     // Add circles
+    const jitterAmount = 8;
+    const weekGroups = d3.group(allData, (d) => d.week);
+
     svg
       .selectAll(".dot")
       .data(allData)
@@ -103,6 +106,16 @@ function drawLineChart(stat) {
       .append("circle")
       .attr("class", "dot")
       .attr("cx", function(d) {
+        const weekData = weekGroups.get(d.week);
+        const sameValuePoints = weekData.filter((p) => p[stat] === d[stat]);
+        if (sameValuePoints.length > 1) {
+          const index = sameValuePoints.findIndex(
+            (p) => p.username === d.username,
+          );
+          const offset =
+            (index - (sameValuePoints.length - 1) / 2) * jitterAmount;
+          return x(d.week) + offset;
+        }
         return x(d.week);
       })
       .attr("cy", function(d) {
