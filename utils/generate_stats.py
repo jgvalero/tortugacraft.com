@@ -35,6 +35,7 @@ for uuid in uuids:
     if "stats" in data and "minecraft:custom" in data["stats"]:
         if "minecraft:play_time" in data["stats"]["minecraft:custom"]:
             total_playtime = data["stats"]["minecraft:custom"]["minecraft:play_time"]
+            total_playtime = round(total_playtime / 20 / 60 / 60, 2)
 
         if "minecraft:deaths" in data["stats"]["minecraft:custom"]:
             total_deaths = data["stats"]["minecraft:custom"]["minecraft:deaths"]
