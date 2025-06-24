@@ -44,9 +44,11 @@ for uuid in uuids:
 
         if "minecraft:damage_taken" in data["stats"]["minecraft:custom"]:
             damage_taken = data["stats"]["minecraft:custom"]["minecraft:damage_taken"]
+            damage_taken = damage_taken / 10
 
         if "minecraft:damage_dealt" in data["stats"]["minecraft:custom"]:
             damage_dealt = data["stats"]["minecraft:custom"]["minecraft:damage_dealt"]
+            damage_dealt = damage_dealt / 10
 
     stats.append(
         {
