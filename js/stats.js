@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-  drawLineChart("total_deaths");
-
   const select = document.getElementById("select-stat");
+  drawLineChart(select.value);
+
   select.addEventListener("change", (event) => {
     drawLineChart(event.target.value);
   });
@@ -58,16 +58,18 @@ function drawLineChart(stat) {
       );
 
     // Add Y axis (selected stat)
-    const y = d3
-      .scaleLinear()
-      .domain([
-        0,
-        d3.max(allData, function(d) {
-          return d[stat];
-        }),
-      ])
-      .range([height, 0]);
-    svg.append("g").call(d3.axisLeft(y));
+    const maxValue = d3.max(allData, function(d) {
+      return d[stat];
+    });
+    const y = d3.scaleLinear().domain([0, maxValue]).range([height, 0]);
+    const tickValues = d3.range(
+      0,
+      maxValue + 1,
+      Math.max(1, Math.ceil(maxValue / 10)),
+    );
+    svg
+      .append("g")
+      .call(d3.axisLeft(y).tickValues(tickValues).tickFormat(d3.format("d")));
 
     // Color palette
     const color = d3.scaleOrdinal(d3.schemeCategory10);
