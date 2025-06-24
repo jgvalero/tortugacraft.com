@@ -28,6 +28,20 @@ function drawLineChart(stat) {
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
+  // Create tooltip
+  const tooltip = d3
+    .select("#line-chart-div")
+    .append("div")
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("background", "rgba(0, 0, 0, 0.8)")
+    .style("color", "white")
+    .style("padding", "8px")
+    .style("border-radius", "4px")
+    .style("font-size", "12px")
+    .style("pointer-events", "none")
+    .style("z-index", "10");
+
   // Load data
   Promise.all([d3.json("data/week-01.json")]).then(function(files) {
     let allData = [];
@@ -128,7 +142,31 @@ function drawLineChart(stat) {
         return color(d.username);
       })
       .style("stroke", "white")
-      .style("stroke-width", 2);
+      .style("stroke-width", 2)
+      .on("mouseover", function(event, d) {
+        const statDisplayName = stat
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (l) => l.toUpperCase());
+        tooltip
+          .style("opacity", 1)
+          .html(
+            `<strong>${d.username}</strong><br/>${statDisplayName}: ${d[stat].toLocaleString()}`,
+          )
+          .style("left", event.pageX + 10 + "px")
+          .style("top", event.pageY - 10 + "px");
+
+        d3.select(this).style("stroke-width", 3).attr("r", 8);
+      })
+      .on("mousemove", function(event) {
+        tooltip
+          .style("left", event.pageX + 10 + "px")
+          .style("top", event.pageY - 10 + "px");
+      })
+      .on("mouseout", function() {
+        tooltip.style("opacity", 0);
+
+        d3.select(this).style("stroke-width", 2).attr("r", 6);
+      });
 
     // Add legend
     const legend = svg
