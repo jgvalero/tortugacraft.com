@@ -20,6 +20,8 @@ for uuid in uuids:
     username = "Herobrine"
     total_deaths = 0
     total_playtime = 0
+    damage_dealt = 0
+    damage_taken = 0
 
     if response.status_code == 200:
         username_obj = json.loads(response.text)
@@ -40,11 +42,19 @@ for uuid in uuids:
         if "minecraft:deaths" in data["stats"]["minecraft:custom"]:
             total_deaths = data["stats"]["minecraft:custom"]["minecraft:deaths"]
 
+        if "minecraft:damage_taken" in data["stats"]["minecraft:custom"]:
+            damage_taken = data["stats"]["minecraft:custom"]["minecraft:damage_taken"]
+
+        if "minecraft:damage_dealt" in data["stats"]["minecraft:custom"]:
+            damage_dealt = data["stats"]["minecraft:custom"]["minecraft:damage_dealt"]
+
     stats.append(
         {
             "username": username,
             "total_deaths": total_deaths,
             "total_playtime": total_playtime,
+            "damage_dealt": damage_dealt,
+            "damage_taken": damage_taken,
         }
     )
 

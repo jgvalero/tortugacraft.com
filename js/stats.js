@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // const select = document.getElementById("select-stat");
-  // drawLineChart(select.value);
-  //
-  // select.addEventListener("change", (event) => {
-  //   drawLineChart(event.target.value);
-  // });
+  const select = document.getElementById("select-stat");
+  drawLineChart(select.value);
+  
+  select.addEventListener("change", (event) => {
+    drawLineChart(event.target.value);
+  });
 });
 
 function drawLineChart(stat) {
@@ -38,6 +38,8 @@ function drawLineChart(stat) {
           week: weekIndex + 1,
           total_deaths: player.total_deaths,
           total_playtime: player.total_playtime,
+          damage_dealt: player.damage_dealt,
+          damage_taken: player.damage_taken,
         });
       });
     });

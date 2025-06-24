@@ -1,0 +1,37 @@
+[
+    {
+        "username": "BapuUwU",
+        "total_deaths": 6,
+        "total_playtime": 5.22,
+        "damage_dealt": 23579,
+        "damage_taken": 4808
+    },
+    {
+        "username": "_rubyuwu_",
+        "total_deaths": 0,
+        "total_playtime": 25.97,
+        "damage_dealt": 46324,
+        "damage_taken": 6346
+    },
+    {
+        "username": "kotanist76555",
+        "total_deaths": 1,
+        "total_playtime": 5.59,
+        "damage_dealt": 4715,
+        "damage_taken": 1439
+    },
+    {
+        "username": "JSVLR",
+        "total_deaths": 1,
+        "total_playtime": 23.39,
+        "damage_dealt": 89049,
+        "damage_taken": 10642
+    },
+    {
+        "username": "ChrisOfTheVast",
+        "total_deaths": 7,
+        "total_playtime": 9.41,
+        "damage_dealt": 11852,
+        "damage_taken": 3863
+    }
+]
