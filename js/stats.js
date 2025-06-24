@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const select = document.getElementById("select-stat");
-  drawLineChart(select.value);
-
-  select.addEventListener("change", (event) => {
-    drawLineChart(event.target.value);
-  });
+  // const select = document.getElementById("select-stat");
+  // drawLineChart(select.value);
+  //
+  // select.addEventListener("change", (event) => {
+  //   drawLineChart(event.target.value);
+  // });
 });
 
 function drawLineChart(stat) {
