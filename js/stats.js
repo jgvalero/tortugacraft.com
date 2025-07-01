@@ -43,7 +43,7 @@ function drawLineChart(stat) {
     .style("z-index", "10");
 
   // Load data
-  Promise.all([d3.json("data/week-01.json")]).then(function(files) {
+  Promise.all([d3.json("data/week-01.json"), d3.json("data/week-02.json")]).then(function(files) {
     let allData = [];
     files.forEach((weekData, weekIndex) => {
       weekData.forEach((player) => {
