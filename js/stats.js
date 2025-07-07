@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   const select = document.getElementById("select-stat");
   drawLineChart(select.value);
-  
+
   select.addEventListener("change", (event) => {
     drawLineChart(event.target.value);
   });
@@ -15,7 +15,7 @@ function drawLineChart(stat) {
   const containerHeight = containerWidth * 0.5625;
 
   // Set dimensions and margins
-  const margin = { top: 10, right: 30, bottom: 30, left: 60 },
+  const margin = { top: 20, right: 30, bottom: 30, left: 60 },
     width = containerWidth - margin.left - margin.right,
     height = containerHeight - margin.top - margin.bottom;
 
@@ -181,17 +181,17 @@ function drawLineChart(stat) {
 
     legend
       .append("rect")
-      .attr("x", width - 18)
+      .attr("x", 10)
       .attr("width", 18)
       .attr("height", 18)
       .style("fill", color);
 
     legend
       .append("text")
-      .attr("x", width - 24)
+      .attr("x", 34)
       .attr("y", 9)
       .attr("dy", ".35em")
-      .style("text-anchor", "end")
+      .style("text-anchor", "start")
       .text(function(d, i) {
         return Array.from(sumstat.keys())[i];
       });
