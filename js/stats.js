@@ -273,5 +273,53 @@ function updateChart(stat) {
       .text(function(d, i) {
         return Array.from(sumstat.keys())[i];
       });
+
+    // Legend hover
+    legend
+      .style("cursor", "pointer")
+      .on("mouseover", function(event, d) {
+        const selectedUsername = d;
+
+        // Fade out all lines except selected
+        svg.selectAll(".line")
+          .transition()
+          .duration(200)
+          .style("opacity", function(lineData) {
+            return lineData[0] === selectedUsername ? 1 : 0.1;
+          })
+          .attr("stroke-width", function(lineData) {
+            return lineData[0] === selectedUsername ? 3 : 1.5;
+          });
+
+        // Fade out all circles except selected
+        svg.selectAll(".dot")
+          .transition()
+          .duration(200)
+          .style("opacity", function(dotData) {
+            return dotData.username === selectedUsername ? 1 : 0.1;
+          });
+
+        // Highlight item
+        d3.select(this).select("text")
+          .style("font-weight", "bold");
+      })
+      .on("mouseout", function() {
+        // Restore all lines
+        svg.selectAll(".line")
+          .transition()
+          .duration(200)
+          .style("opacity", 1)
+          .attr("stroke-width", 1.5);
+
+        // Restore all circles
+        svg.selectAll(".dot")
+          .transition()
+          .duration(200)
+          .style("opacity", 1);
+
+        // Remove legend highlight
+        d3.select(this).select("text")
+          .style("font-weight", "normal");
+      });
   }
 }
