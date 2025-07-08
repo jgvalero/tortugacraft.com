@@ -246,8 +246,6 @@ function updateChart(stat) {
     });
 
   // Update legend
-  svg.selectAll(".legend").remove();
-
   // Sort by current stat
   const userTotals = Array.from(sumstat.entries()).map(([username, userData]) => {
     const lastValue = userData[userData.length - 1][stat];
@@ -256,15 +254,21 @@ function updateChart(stat) {
 
   const legend = svg
     .selectAll(".legend")
-    .data(userTotals)
-    .enter()
-    .append("g")
-    .attr("class", "legend")
-    .attr("transform", function(d, i) {
-      return "translate(0," + i * 20 + ")";
-    });
+    .data(userTotals, d => d.username);
 
   legend
+    .exit()
+    .transition()
+    .duration(transitionDuration)
+    .style("opacity", 0)
+    .remove();
+
+  const legendEnter = legend.enter()
+    .append("g")
+    .attr("class", "legend")
+    .style("opacity", 0);
+
+  legendEnter
     .append("rect")
     .attr("x", 10)
     .attr("width", 18)
@@ -273,18 +277,32 @@ function updateChart(stat) {
       return color(d.username);
     });
 
-  legend
+  legendEnter
     .append("text")
     .attr("x", 34)
     .attr("y", 9)
     .attr("dy", ".35em")
-    .style("text-anchor", "start")
+    .style("text-anchor", "start");
+
+  const legendMerge = legendEnter.merge(legend);
+
+  legendMerge
+    .transition()
+    .duration(transitionDuration)
+    .attr("transform", function(d, i) {
+      return "translate(0," + i * 20 + ")";
+    })
+    .style("opacity", 1);
+
+  legendMerge.select("text")
+    .transition()
+    .duration(transitionDuration)
     .text(function(d) {
       return `${d.username} (${d.lastValue.toLocaleString()})`;
     });
 
   // Legend hover
-  legend
+  legendMerge
     .style("cursor", "pointer")
     .on("mouseover", function(event, d) {
       const selectedUsername = d.username;
