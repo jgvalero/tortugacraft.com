@@ -1,0 +1,65 @@
+[
+    {
+        "username": "BapuUwU",
+        "total_deaths": 10,
+        "total_playtime": 39.66,
+        "damage_dealt": 7720.6,
+        "damage_taken": 1513.8
+    },
+    {
+        "username": "Tobinnovation",
+        "total_deaths": 0,
+        "total_playtime": 0.43,
+        "damage_dealt": 76.4,
+        "damage_taken": 1.6
+    },
+    {
+        "username": "asimii",
+        "total_deaths": 18,
+        "total_playtime": 49.68,
+        "damage_dealt": 4956.6,
+        "damage_taken": 2123.2
+    },
+    {
+        "username": "Ranger_Gotanks",
+        "total_deaths": 5,
+        "total_playtime": 7.08,
+        "damage_dealt": 3086.2,
+        "damage_taken": 790.6
+    },
+    {
+        "username": "_rubyuwu_",
+        "total_deaths": 1,
+        "total_playtime": 89.76,
+        "damage_dealt": 14289.8,
+        "damage_taken": 1943.4
+    },
+    {
+        "username": "kotanist76555",
+        "total_deaths": 5,
+        "total_playtime": 18.61,
+        "damage_dealt": 1680.6,
+        "damage_taken": 608.5
+    },
+    {
+        "username": "Syntrix3",
+        "total_deaths": 10,
+        "total_playtime": 17.11,
+        "damage_dealt": 2243.6,
+        "damage_taken": 657.1
+    },
+    {
+        "username": "JSVLR",
+        "total_deaths": 2,
+        "total_playtime": 89.62,
+        "damage_dealt": 27534.1,
+        "damage_taken": 2649.3
+    },
+    {
+        "username": "ChrisOfTheVast",
+        "total_deaths": 16,
+        "total_playtime": 68.03,
+        "damage_dealt": 13013.7,
+        "damage_taken": 2247.8
+    }
+]
