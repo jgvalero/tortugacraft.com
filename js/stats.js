@@ -246,80 +246,88 @@ function updateChart(stat) {
     });
 
   // Update legend
-  if (svg.selectAll(".legend").empty()) {
-    const legend = svg
-      .selectAll(".legend")
-      .data(color.domain().slice(0, sumstat.size))
-      .enter()
-      .append("g")
-      .attr("class", "legend")
-      .attr("transform", function(d, i) {
-        return "translate(0," + i * 20 + ")";
-      });
+  svg.selectAll(".legend").remove();
 
-    legend
-      .append("rect")
-      .attr("x", 10)
-      .attr("width", 18)
-      .attr("height", 18)
-      .style("fill", color);
+  // Sort by current stat
+  const userTotals = Array.from(sumstat.entries()).map(([username, userData]) => {
+    const lastValue = userData[userData.length - 1][stat];
+    return { username, lastValue };
+  }).sort((a, b) => b.lastValue - a.lastValue);
 
-    legend
-      .append("text")
-      .attr("x", 34)
-      .attr("y", 9)
-      .attr("dy", ".35em")
-      .style("text-anchor", "start")
-      .text(function(d, i) {
-        return Array.from(sumstat.keys())[i];
-      });
+  const legend = svg
+    .selectAll(".legend")
+    .data(userTotals)
+    .enter()
+    .append("g")
+    .attr("class", "legend")
+    .attr("transform", function(d, i) {
+      return "translate(0," + i * 20 + ")";
+    });
 
-    // Legend hover
-    legend
-      .style("cursor", "pointer")
-      .on("mouseover", function(event, d) {
-        const selectedUsername = d;
+  legend
+    .append("rect")
+    .attr("x", 10)
+    .attr("width", 18)
+    .attr("height", 18)
+    .style("fill", function(d) {
+      return color(d.username);
+    });
 
-        // Fade out all lines except selected
-        svg.selectAll(".line")
-          .transition()
-          .duration(200)
-          .style("opacity", function(lineData) {
-            return lineData[0] === selectedUsername ? 1 : 0.1;
-          })
-          .attr("stroke-width", function(lineData) {
-            return lineData[0] === selectedUsername ? 3 : 1.5;
-          });
+  legend
+    .append("text")
+    .attr("x", 34)
+    .attr("y", 9)
+    .attr("dy", ".35em")
+    .style("text-anchor", "start")
+    .text(function(d) {
+      return `${d.username} (${d.lastValue.toLocaleString()})`;
+    });
 
-        // Fade out all circles except selected
-        svg.selectAll(".dot")
-          .transition()
-          .duration(200)
-          .style("opacity", function(dotData) {
-            return dotData.username === selectedUsername ? 1 : 0.1;
-          });
+  // Legend hover
+  legend
+    .style("cursor", "pointer")
+    .on("mouseover", function(event, d) {
+      const selectedUsername = d.username;
 
-        // Highlight item
-        d3.select(this).select("text")
-          .style("font-weight", "bold");
-      })
-      .on("mouseout", function() {
-        // Restore all lines
-        svg.selectAll(".line")
-          .transition()
-          .duration(200)
-          .style("opacity", 1)
-          .attr("stroke-width", 1.5);
+      // Fade out all lines except selected
+      svg.selectAll(".line")
+        .transition()
+        .duration(200)
+        .style("opacity", function(lineData) {
+          return lineData[0] === selectedUsername ? 1 : 0.1;
+        })
+        .attr("stroke-width", function(lineData) {
+          return lineData[0] === selectedUsername ? 3 : 1.5;
+        });
 
-        // Restore all circles
-        svg.selectAll(".dot")
-          .transition()
-          .duration(200)
-          .style("opacity", 1);
+      // Fade out all circles except selected
+      svg.selectAll(".dot")
+        .transition()
+        .duration(200)
+        .style("opacity", function(dotData) {
+          return dotData.username === selectedUsername ? 1 : 0.1;
+        });
 
-        // Remove legend highlight
-        d3.select(this).select("text")
-          .style("font-weight", "normal");
-      });
-  }
+      // Highlight item
+      d3.select(this).select("text")
+        .style("font-weight", "bold");
+    })
+    .on("mouseout", function() {
+      // Restore all lines
+      svg.selectAll(".line")
+        .transition()
+        .duration(200)
+        .style("opacity", 1)
+        .attr("stroke-width", 1.5);
+
+      // Restore all circles
+      svg.selectAll(".dot")
+        .transition()
+        .duration(200)
+        .style("opacity", 1);
+
+      // Remove legend highlight
+      d3.select(this).select("text")
+        .style("font-weight", "normal");
+    });
 }
