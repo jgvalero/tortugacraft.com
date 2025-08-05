@@ -47,7 +47,7 @@ function drawLineChart(stat) {
       .style("z-index", "10");
 
     // Load data
-    Promise.all([d3.json("data/week-01.json"), d3.json("data/week-02.json"), d3.json("data/week-03.json"), d3.json("data/week-04.json"), d3.json("data/week-05.json"), d3.json("data/week-06.json")]).then(function(files) {
+    Promise.all([d3.json("data/week-01.json"), d3.json("data/week-02.json"), d3.json("data/week-03.json"), d3.json("data/week-04.json"), d3.json("data/week-05.json"), d3.json("data/week-06.json"), d3.json("data/week-07.json")]).then(function(files) {
       allData = [];
       files.forEach((weekData, weekIndex) => {
         weekData.forEach((player) => {
